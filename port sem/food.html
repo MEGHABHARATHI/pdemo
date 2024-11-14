@@ -1,0 +1,428 @@
+Food delivery 
+Html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Delivery Website</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #444;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #ff7043;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+        nav {
+            background-color: #333;
+            text-align: center;
+            padding: 10px 0;
+        }
+        nav a {
+            text-decoration: none;
+            color: white;
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            transition: background-color 0.3s;
+            display: inline-block;
+        }
+        nav a:hover {
+            background-color: #555;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+        }
+        .intro h2 {
+            font-size: 2rem;
+            color: #ff7043;
+        }
+        .intro p {
+            font-size: 1.2rem;
+            margin: 20px 0;
+            line-height: 1.5;
+        }
+
+        .order-button {
+            background-color: #ff7043;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background-color 0.3s;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .order-button:hover {
+            background-color: #e95e32;
+        }
+        .hotel-item {
+            background-color: #ff7043;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .hotel-item:hover {
+            background-color: #e95e32;
+        }
+
+        .menu-category {
+            display: none;
+        }
+
+        .menu-category h2 {
+            background-color: #ff7043;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .menu-item {
+            background-color: #f4f4f4;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 15px;
+            width: calc(33.333% - 20px);
+            box-sizing: border-box;
+            text-align: center;
+            transition: transform 0.3s;
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-item h3 {
+            margin: 10px 0;
+            font-size: 1.5rem;
+            color: #ff7043;
+        }
+
+        .menu-item p {
+            font-size: 1.2rem;
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .menu-item button,
+        .menu-item .cancel-button {
+            background-color: #ff7043;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 0;
+        }
+
+        .menu-item button:hover,
+        .menu-item .cancel-button:hover {
+            background-color: #e95e32;
+        }
+        .menu-item .cancel-button {
+            background-color: #ff4d4d;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+        .order-summary,
+        .order-form,
+        .order-success {
+            margin-top: 20px;
+            background-color: #ffe6cc;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .order-summary h3,
+        .order-form h3 {
+            margin-top: 0;
+            color: #ff7043;
+        }
+
+        .order-summary p {
+            margin: 5px 0;
+            font-size: 1.2rem;
+            color: #333;
+        }
+        .order-form input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+        }
+        .order-form button,
+        .cancel-button {
+            background-color: #ff7043;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        .order-form button:hover,
+        .cancel-button:hover {
+            background-color: #e95e32;
+        }
+        .cancel-button {
+            display: inline-block;
+            background-color: #ff4d4d;
+            color: white;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .cancel-button:hover {
+            background-color: #d84315;
+        }
+        .order-success {
+            display: none;
+            background-color: #81c784;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+        .back-button {
+            display: inline-block;
+            background-color: #ccc;
+            color: white;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .back-button:hover {
+            background-color: #999;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Food Delivery</h1>
+</header>
+<nav>
+    <a href="#" onclick="showPage('home')">Home</a>
+    <a href="#" onclick="showPage('hotel-list')">Order Now</a>
+</nav>
+<div id="home" class="container">
+    <div class="intro">
+        <h2>Delicious Food Delivered to Your Doorstep</h2>
+        <p>Welcome to the Food Delivery Website, where we bring the best of vegetarian and non-vegetarian dishes right to your home. From traditional Idlis to mouth-watering Chicken Biriyani, we have something for everyone!</p>
+        <p>Ready to place your order? Click the button below to get started!</p>
+        <a href="#" class="order-button" onclick="showPage('hotel-list')">Order Now</a>
+    </div>
+</div>
+<div id="hotel-list" class="container" style="display:none;">
+    <div class="hotel-item" onclick="showMenu('ananda-bhavan')">
+        <h3>Ananda Bhavan</h3>
+        <div class="rating">★★★★★</div>
+    </div>
+    <div class="hotel-item" onclick="showMenu('thalappakatti')">
+        <h3>Thalappakatti</h3>
+        <div class="rating">★★★★★</div>
+    </div>
+    <div class="hotel-item" onclick="showMenu('saravana-bhavan')">
+        <h3>Saravana Bhavan</h3>
+        <div class="rating">★★★★☆</div>
+    </div>
+    <div class="hotel-item" onclick="showMenu('murugan-idli')">
+        <h3>Murugan hotel</h3>
+        <div class="rating">★★★★☆</div>
+    </div>
+</div>
+<div id="order-page" class="container" style="display:none;">
+    <span class="back-button" onclick="showPage('hotel-list')">Back to Hotels</span>
+
+    <div id="ananda-bhavan" class="menu-category">
+        <h2>Ananda Bhavan Menu</h2>
+        <div class="menu">
+            <div class="menu-item">
+                <h3>Idli</h3>
+                <p>Price: $2</p>
+                <button onclick="addToCart('Idli', 2)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <h3>Dosai</h3>
+                <p>Price: $3</p>
+                <button onclick="addToCart('Dosai', 3)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <h3>Pongal</h3>
+                <p>Price: $4</p>
+                <button onclick="addToCart('Pongal', 4)">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+    <div id="thalappakatti" class="menu-category">
+        <h2>Thalappakatti Menu</h2>
+        <div class="menu">
+            <div class="menu-item">
+                <h3>Chicken Biriyani</h3>
+                <p>Price: $10</p>
+                <button onclick="addToCart('Chicken Biriyani', 10)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <h3>Mutton Biriyani</h3>
+                <p>Price: $12</p>
+                <button onclick="addToCart('Mutton Biriyani', 12)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <h3>Chicken 65</h3>
+                <p>Price: $8</p>
+                <button onclick="addToCart('Chicken 65', 8)">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+    <div id="saravana-bhavan" class="menu-category">
+        <h2>Saravana Bhavan Menu</h2>
+        <div class="menu">
+            <div class="menu-item">
+                <h3>Ghee Roast</h3>
+                <p>Price: $5</p>
+                <button onclick="addToCart('Ghee Roast', 5)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <h3>Chana Masala</h3>
+                <p>Price: $7</p>
+                <button onclick="addToCart('Chana Masala', 7)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <h3>Puri Bhaji</h3>
+                <p>Price: $6</p>
+                <button onclick="addToCart('Puri Bhaji', 6)">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+    <div id="murugan-idli" class="menu-category">
+        <h2>Murugan hotel Menu</h2>
+        <div class="menu">
+            <div class="menu-item">
+                <h3>Ghee Idli</h3>
+                <p>Price: $3</p>
+                <button onclick="addToCart('Ghee Idli', 3)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <h3>Podi Dosai</h3>
+                <p>Price: $4</p>
+                <button onclick="addToCart('Podi Dosai', 4)">Add to Cart</button>
+            </div>
+            <div class="menu-item">
+                <h3>Onion Uttapam</h3>
+                <p>Price: $5</p>
+                <button onclick="addToCart('Onion Uttapam', 5)">Add to Cart</button>
+            </div>
+        </div>
+    </div>
+    <div class="order-summary" id="order-summary" style="display:none;">
+        <h3>Order Summary</h3>
+        <div id="cart-items"></div>
+        <p id="total-price"></p>
+        <button onclick="showOrderForm()">Place Order</button>
+        <span class="cancel-button" onclick="clearCart()">Cancel</span>
+    </div>
+    <div class="order-form" id="order-form" style="display:none;">
+        <h3>Enter your details</h3>
+        <input type="text" id="name" placeholder="Name" required>
+        <input type="text" id="address" placeholder="Address" required>
+        <input type="text" id="phone" placeholder="Phone Number" required>
+        <button onclick="placeOrder()">Submit Order</button>
+    </div>
+
+    <div class="order-success" id="order-success">
+        <h2>Thank you for your order!</h2>
+        <p>Your food is being prepared and will be delivered to you shortly.</p>
+        <span class="back-button" onclick="showPage('home')">Back to Home</span>
+    </div>
+</div>
+<script>
+    let cart = [];
+
+function showPage(pageId) {
+    const pages = document.querySelectorAll('.container');
+    pages.forEach(page => page.style.display = 'none');
+    document.getElementById(pageId).style.display = 'block';
+}
+
+function showMenu(hotelId) {
+    showPage('order-page');
+    const menus = document.querySelectorAll('.menu-category');
+    menus.forEach(menu => menu.style.display = 'none');
+    document.getElementById(hotelId).style.display = 'block';
+}
+
+function addToCart(itemName, price) {
+    cart.push({ name: itemName, price });
+    updateCart();
+}
+
+function updateCart() {
+    const cartItems = document.getElementById('cart-items');
+    const totalPriceElem = document.getElementById('total-price');
+    
+    cartItems.innerHTML = cart.map(item => <p>${item.name} - $${item.price}</p>).join('');
+    totalPriceElem.textContent = 'Total: $' + cart.reduce((total, item) => total + item.price, 0);
+    
+    document.getElementById('order-summary').style.display = cart.length ? 'block' : 'none';
+}
+
+function placeOrder() {
+    alert("Order placed successfully!");
+    cart = [];
+    updateCart();
+    showPage('home');
+}
+
+</script>
+</body>
+</html>
